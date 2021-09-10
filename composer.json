@@ -1,0 +1,18 @@
+{
+    "name": "anime/mvc_controllers",
+    "description":"mvc test",
+
+    "authors": [
+        {
+            "name": "HamzaAnzlim",
+            "email": "hamza.anzlim@gmail.com"
+            
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "app\\":"./"
+        }
+    }
+}
