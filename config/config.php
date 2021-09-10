@@ -11,5 +11,5 @@
  
     define('DATABASE_HOST_NAME', 'mysql:host=localhost;');
     define('DATABASE_USER_NAME', 'root');
-    define('DATABASE_PASSWORD', 'hamza063018092');
+    define('DATABASE_PASSWORD', '');
     define('DATABASE_DB_NAME', 'dbname=test');

@@ -2,7 +2,7 @@
 
 namespace app\controllers ;
 
-use app\models\UserModel;
+use app\models\tables\UserModel;
 use app\Router;
 use app\Request;
 
