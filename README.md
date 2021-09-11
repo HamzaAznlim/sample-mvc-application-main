@@ -101,7 +101,7 @@ class UserModel extends ModelAbstract
 }
 ```
 
-crud operations (Create , Read , Update , Delete) :
+## crud operations (Create , Read , Update , Delete) :
 
 #### Create
 
