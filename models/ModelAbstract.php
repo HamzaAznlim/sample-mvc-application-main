@@ -11,7 +11,7 @@ use app\Database\Database;
      const INT_VAL =  \PDO::PARAM_INT;
      const DECIMAL_VAL = 4;
 
-
+ 
      public function __construct()
      {
      }
@@ -120,5 +120,43 @@ use app\Database\Database;
          $statement = Database::GetInstance()->prepare($sql);
          
          return $statement->execute() === true ? $statement->fetchAll(\PDO::FETCH_CLASS|\PDO::FETCH_PROPS_LATE, \get_called_class(), array_keys(static::$schema)) : false;
+     }
+
+
+     public static function QueryGet($sql, $options = array())
+     {
+         $stmt = Database::GetInstance()->prepare($sql);
+         if (!empty($options)) {
+             foreach ($options as $columnName => $type) {
+                 if ($type[0] == 4) {
+                     $sanitizedValue = filter_var($type[1], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                     $stmt->bindValue(":{$columnName}", $sanitizedValue);
+                 } elseif ($type[0] == 5) {
+                     if (!preg_match(self::VALIDATE_DATE_STRING, $type[1]) || !preg_match(self::VALIDATE_DATE_NUMERIC, $type[1])) {
+                         $stmt->bindValue(":{$columnName}", self::DEFAULT_MYSQL_DATE);
+                         continue;
+                     }
+                     $stmt->bindValue(":{$columnName}", $type[1]);
+                 } else {
+                     $stmt->bindValue(":{$columnName}", $type[1], $type[0]);
+                 }
+             }
+         }
+         $stmt->execute();
+         if (method_exists(get_called_class(), '__construct')) {
+             $results = $stmt->fetchAll(\PDO::FETCH_CLASS | \PDO::FETCH_PROPS_LATE, get_called_class(), array_keys(static::$schema));
+         } else {
+             $results = $stmt->fetchAll(\PDO::FETCH_CLASS, get_called_class());
+         }
+         if ((is_array($results) && !empty($results))) {
+             return new \ArrayIterator($results);
+         };
+         return false;
+     }
+
+
+     public static function getTable()
+     {
+         return static::$table;
      }
  }

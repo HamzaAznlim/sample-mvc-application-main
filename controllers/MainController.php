@@ -16,7 +16,8 @@ class MainController
 
     public function index(Router $route)
     {
-        $users =  UserModel::Get();
+        $users =  UserModel::get();
+
         return   $route->view("index", compact('users'));
     }
 

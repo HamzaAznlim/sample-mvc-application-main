@@ -20,4 +20,15 @@ class UserModel extends ModelAbstract
         'password'      => self::STR_VAL,
         'Age'           => self::INT_VAL,
     ];
+
+
+    public static function getByAge()
+    {
+        return static::QueryGet(
+            "SELECT * FROM `user_` WHERE  Age = :Age",
+            [
+                'Age' => array(static::STR_VAL,22)
+            ]
+        );
+    }
 }

@@ -84,13 +84,12 @@ example of  UserModel  :
 ```php
 class UserModel extends ModelAbstract
 {
-    protected static string $table ='user_';
+    protected static string $table ='user_'; // put the table name
+    protected static $primaryKey = 'id';    // put the table primaryKey 
     public $name;
     public $Email;
     public $password;
     public $Age ;
-
-    protected static $primaryKey = 'id';
     protected static $schema = [
 
         'name'          => self::STR_VAL,
@@ -134,5 +133,57 @@ NOTICE !! When you pass array to create method `$users->create(array())` pass th
     $users = new UserModel();
 
     $user->find(2)->delete();
+
+```
+
+## If you want to create custom query you can do it like this:
+
+example custom query in the controller class
+
+```php
+
+    public function index(Router $route)
+    {
+
+        $users =  UserModel::QueryGet(
+            "SELECT * FROM `user_` WHERE  Age = :Age",
+            [
+                'Age' => array(UserModel::STR_VAL,22)
+            ]
+        );
+
+
+        return   $route->view("index", compact('users'));
+    }
+    
+
+```
+
+example custom query in the UserModel class
+
+```php
+
+     public static function getByAge()
+    {
+        return static::QueryGet(
+            "SELECT * FROM `user_` WHERE  Age = :Age",
+            [
+                'Age' => array(static::STR_VAL,22)
+            ]
+        );
+    }
+
+```
+
+you can call it like this in your controller class:
+
+```php
+
+    public function index(Router $route)
+    {
+        $users =  UserModel::getByAge();
+
+        return   $route->view("index", compact('users'));
+    }
 
 ```
