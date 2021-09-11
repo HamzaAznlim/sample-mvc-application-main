@@ -1,13 +1,32 @@
 <?php
 use app\controllers\MainController;
 
-$this->get('/', [MainController::class,'index']);
+/**
+ *------------------------------------------------------
+ * crud operations (Create , Read , Update , Delete)
+ *------------------------------------------------------
+ */
 
+
+/**
+ * Create
+ *
+ */
+$this->get('/', [MainController::class,'index']);
 $this->post('/user/save', [MainController::class,'store']);
 
-
+/**
+ * Read
+ *
+ */
 $this->get('/user/{id}', [MainController::class,'showOne']);
 
-$this->get('/edit/{id}', [MainController::class,'edit']);
+/**
+ * Update
+ */
 
+$this->get('/edit/{id}', [MainController::class,'edit']);
+/**
+ * Delete
+ */
 $this->get('/delete/{id}', [MainController::class,'delete']);
