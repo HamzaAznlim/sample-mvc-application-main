@@ -50,3 +50,62 @@ public function store(Router $route, Request $request)
         }
     }
 ```
+
+## View
+
+A view is some form of visualization of the state of the model.
+The view renders the contents of a model via the controller View files go in the `/Views`
+[View](View/)
+
+the view method will render the contents it takes two parameters: path to the view file  and data pass in like this:
+
+```php
+public function index(Router $route)
+    {
+        $users =  UserModel::Get();
+        
+        return $route->view("index", compact('users')); 
+        /* 
+        *    OR
+        */ 
+        return $route->view("index",['users' => $users]);
+        
+    }
+```
+
+## Models
+
+1. A model is an object representing data or even activity,  database table
+2. The model represents enterprise data and the business rules that govern access to and updates of this data.
+3. The model is the piece that represents the state and low-level behavior of the component. It manages the state and conducts all transformations on that state. The model has no specific knowledge of either its controllers or its views. The view is the piece that manages the visual display of the state represented by the model. A model can have more than one view
+
+example of how to Model User :
+
+```php
+class UserModel extends ModelAbstract
+{
+    protected static string $table ='user_';
+    public $name;
+    public $Email;
+    public $password;
+    public $Age ;
+
+    protected static $primaryKey = 'id';
+    protected static $schema = [
+
+        'name'          => self::STR_VAL,
+        'Email'         => self::STR_VAL,
+        'password'      => self::STR_VAL,
+        'Age'           => self::INT_VAL,
+    ];
+}
+```
+
+if you want to create a new user you can do it like this:
+
+```php
+    $users = new UserModel();
+    $users->create(['hamza','hamza@gmail.com','dqsd§54dq231',22]);
+```
+
+NOTICE !! When you pass array to create method `$users->create(['hamza','hamza@gmail.com','dqsd§54dq231',22])` pass theme with the same order as you defined in your model schema
