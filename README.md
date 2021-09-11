@@ -79,7 +79,7 @@ public function index(Router $route)
 2. The model represents enterprise data and the business rules that govern access to and updates of this data.
 3. The model is the piece that represents the state and low-level behavior of the component. It manages the state and conducts all transformations on that state. The model has no specific knowledge of either its controllers or its views. The view is the piece that manages the visual display of the state represented by the model. A model can have more than one view
 
-example of how to Model User :
+example of  UserModel  :
 
 ```php
 class UserModel extends ModelAbstract
