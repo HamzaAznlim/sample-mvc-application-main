@@ -55,7 +55,7 @@ public function store(Router $route, Request $request)
 
 A view is some form of visualization of the state of the model.
 The view renders the contents of a model via the controller View files go in the `/Views`
-[View](View/)
+[views](views)
 
 the view method will render the contents it takes two parameters: path to the view file  and data pass in like this:
 
