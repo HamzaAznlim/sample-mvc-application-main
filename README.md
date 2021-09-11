@@ -148,7 +148,7 @@ example custom query in the controller class
         $users =  UserModel::QueryGet(
             "SELECT * FROM `user_` WHERE  Age = :Age",
             [
-                'Age' => array(UserModel::STR_VAL,22)
+                'Age' => array(UserModel::INT_VAL,22)
             ]
         );
 
@@ -168,7 +168,7 @@ example custom query in the UserModel class
         return static::QueryGet(
             "SELECT * FROM `user_` WHERE  Age = :Age",
             [
-                'Age' => array(static::STR_VAL,22)
+                'Age' => array(static::INT_VAL,22)
             ]
         );
     }

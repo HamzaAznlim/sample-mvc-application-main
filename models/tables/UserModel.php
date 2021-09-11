@@ -27,7 +27,7 @@ class UserModel extends ModelAbstract
         return static::QueryGet(
             "SELECT * FROM `user_` WHERE  Age = :Age",
             [
-                'Age' => array(static::STR_VAL,22)
+                'Age' => array(static::INT_VAL,22)
             ]
         );
     }
