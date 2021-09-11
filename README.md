@@ -101,11 +101,38 @@ class UserModel extends ModelAbstract
 }
 ```
 
-if you want to create a new user you can do it like this:
+crud operations (Create , Read , Update , Delete) :
+
+#### Create
 
 ```php
     $users = new UserModel();
     $users->create(['hamza','hamza@gmail.com','dqsd§54dq231',22]);
 ```
 
-NOTICE !! When you pass array to create method `$users->create(['hamza','hamza@gmail.com','dqsd§54dq231',22])` pass theme with the same order as you defined in your model schema
+NOTICE !! When you pass array to create method `$users->create(array())` pass theme with the same order as you defined in your model schema
+
+#### Read
+
+```php
+    $users =  UserModel::Get();
+```
+
+#### Update
+
+```php
+    $users = new UserModel();
+
+    $user = $users->find(2);
+    $user->name = "New Hamza Anzlim";
+    $user->save();
+```
+
+#### Delete
+
+```php
+    $users = new UserModel();
+
+    $user->find(2)->delete();
+
+```
